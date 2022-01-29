@@ -1,0 +1,2 @@
+//Alice wins iff n is even otherwise
+        return n%2==0;
