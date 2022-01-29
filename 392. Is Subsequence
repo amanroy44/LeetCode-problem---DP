@@ -1,0 +1,29 @@
+class Solution {
+    //1. Iterate over String s and String t from position 0.
+    //2. If match found increment s and t and count
+    //3. If match not found increment ony t
+    //4. Check count
+    public boolean isSubsequence(String s, String t) {
+        int lens = s.length();
+        int lent =t.length();
+        int is=0;
+        int it=0;
+        int count=0;
+        while(is<lens&&it<lent){
+            if(s.charAt(is)==t.charAt(it)){
+                count+=1;
+                is+=1;
+                it+=1;
+            }
+            else{
+                it+=1;
+            }
+        }
+        if(count==lens){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }                                  
+}
