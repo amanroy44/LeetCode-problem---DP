@@ -1,0 +1,36 @@
+class Solution {
+    public int maxSubArray(int[] nums) {
+        //1. Iterate throught the nums
+        //2. Check for the -ve number, if -ve found increment count & store in negSum var.
+        //3. take the sum & if(sum>maxSum) store in maxSum, if(sum<0) make sum=0
+        //4. check count, if count reaches nums length than return negSum else return maxSum
+        int sum=0;
+        int negsum=Integer.MIN_VALUE;
+        int count=0;
+        int maxsum=0;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]<0){
+                count+=1;
+                if(nums[i]>negsum){
+                    negsum=nums[i];
+                }
+                
+            }
+            sum+=nums[i];
+            if(sum>maxsum){
+                maxsum=sum;
+            }
+            if(sum<0){
+                sum=0;
+            }
+        }
+        if(count==nums.length){
+            return negsum;
+        }
+        else{
+            return maxsum;
+        }
+        
+      
+    }
+}
