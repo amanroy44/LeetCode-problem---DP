@@ -1,0 +1,13 @@
+class Solution {
+    public int minCostClimbingStairs(int[] cost) {
+        int temp1 = cost[0];
+        int temp2 = cost[1];
+        for(int i=2 ; i<cost.length ; i++){
+            int val = Math.min(temp1,temp2)+cost[i];
+            temp1=temp2;
+            temp2=val;
+        }
+        return Math.min(temp1,temp2);
+      
+    }
+}
