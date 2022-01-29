@@ -1,0 +1,31 @@
+class Solution {
+    //take two variable open and close initiaize with n
+    -public List<String> generateParenthesis(int n) {
+        List<String> list =  new ArrayList<String>();
+        int open=n;
+        int close=n;
+        String outStr="";
+        solve(list,open,close,outStr);
+        return list;
+        
+    }
+    //1. Base condition is when both open and close is 0
+    //2. if open>0, make new -String and copy outStr  and add '(' to it. Call recursive--
+    //3. if colse>open make new String op2- and add ")" to it. Call recursion
+    public void solve(List<String> list, int open, int close, String outStr){
+        if(open==0&&close==0){
+            list.add(outStr);
+            return;
+        }
+        if(open>0){
+            String op1=outStr;
+            op1+="(";
+            solve(list,open-1,close,op1);
+        }
+        if(close>open){
+            String op2=outStr;
+            op2+=")";
+            solve(list,open,close-1,op2);
+        }
+    }
+}
