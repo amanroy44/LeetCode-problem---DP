@@ -1,0 +1,28 @@
+class Solution {
+    public int[] countBits(int n) {
+        int len=n+1;
+        int count=0;
+        int[] arr = new int[len];
+        if(n==0){
+            arr[0]=0;
+            return arr;
+        }
+        arr[0]=0;
+        
+        for(int i=1;i<=n;i++){
+            int num=i;
+            while(num>0){
+                int rem=num%2;
+                
+                if(rem==1){
+                    count+=1;
+                }
+                num=num/2;
+                
+            }
+            arr[i]=count;
+            count=0;
+        }
+        return arr;
+    }
+}
