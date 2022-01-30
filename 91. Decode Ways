@@ -1,0 +1,34 @@
+class Solution {
+    //Define a global map<Integer,Integer>
+    Map<Integer,Integer> map = new HashMap<Integer,Integer>();
+    public int numDecodings(String s) {
+        int i=0;
+        //call helper method by pasiing index as 0 and it will return int
+        return helper(s,i);
+    }
+    public int helper(String s,int i){
+        //base case
+        if(i>=s.length()){
+            return 1;
+        }
+        //if any char found is 0, return 0
+        if(s.charAt(i)=='0'){
+            return 0;
+        }
+        //if found in map return map
+        if(map.containsKey(i)){
+            return map.get(i);
+        }
+        //increment i and store it in ways variable
+        int ways = helper(s,i+1);
+        //i pos shold be always till 1 less than length-1 and value of i,i+1 should <=26
+        if(i+2<=s.length()&&Integer.parseInt(s.substring(i,i+2))<=26){
+            //increment ways by increment i
+            ways+=helper(s,i+2);
+        }
+        //put in map and return ways
+        map.put(i,ways);
+        return ways;
+    }
+    
+}
