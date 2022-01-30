@@ -1,0 +1,35 @@
+class Solution {
+    public int jump(int[] nums) {
+        //1. Initialize three variable range,steps and count
+        int range = nums[0];
+        int steps = nums[0];
+        int count=1; 
+        //2. If nums length is 1, return 0
+        if(nums.length==1){
+            return 0;
+        }
+        //3. Iterate from i=1 to end
+        for(int i=1 ; i<nums.length ; i++){
+            //if i reaches numslength-1, return count
+            if(i==nums.length-1){
+                return count;
+            }
+            
+            //4. If nums[i]+i is greater than range, update range
+            if(nums[i]+i>range){
+                range = nums[i]+i;
+            }
+            
+            //5. decrement steps and check if steps==0
+            //if steps reaches 0, increment count and set steps to range-i
+            steps-=1;
+            if(steps==0){
+                count+=1;
+                steps=range-i;
+            }
+            
+        }
+        
+        return count;
+    }
+}
