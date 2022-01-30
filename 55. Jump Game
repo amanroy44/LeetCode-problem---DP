@@ -1,0 +1,19 @@
+class Solution {
+    public boolean canJump(int[] nums) {
+        //Initialize a variable reachable as 0
+        int reachable=0;
+        //start a loop from 0 to end
+        for(int i=0;i<nums.length;i++){
+            //Whenever reachable exceeds or become equal i than return false.
+            //Reachable should be always less than i
+            if(i>reachable){
+                return false;
+            }
+            //update reachable in each index
+            if(nums[i]+i>reachable){
+                reachable=nums[i]+i;
+            }
+        }
+        return true;
+    }
+}
