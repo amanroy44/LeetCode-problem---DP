@@ -1,0 +1,56 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    //initialize start=1 and end=n and call helper
+    //check base condn if(star>end) add null to list and return
+    //chack base if (start==end) add start to list and return
+    //else iterate from start to end
+    //leftnode of LIST type = helper(start,i-1)
+    //rightnode of LIST type = helper(i+1,end)
+    //iterate over leftnode & rightnode
+    //make node of TreeNode type of element i
+    //make node points to leftnode and rightnode of List iterated
+    //add node to list
+    public List<TreeNode> generateTrees(int n) {
+        int start=1;
+        int end=n;
+        return helper(start,end);
+    }
+    public List<TreeNode>  helper(int start,int end){
+        List<TreeNode> list =new ArrayList<TreeNode>();
+        if(start>end){
+            list.add(null);
+            return list;
+        }
+        if(start==end){
+            list.add(new TreeNode(start));
+            return list;
+        }
+        for(int i=start;i<=end;i++){
+            List<TreeNode> leftNode = helper(start,i-1);
+            List<TreeNode> rightNode = helper(i+1,end);
+            for(TreeNode lnode: leftNode){
+                for(TreeNode rnode: rightNode){
+                    TreeNode node = new TreeNode(i);
+                    node.left=lnode;
+                    node.right=rnode;
+                    list.add(node);
+                }
+            }
+        }
+        return list;
+    }
+}
