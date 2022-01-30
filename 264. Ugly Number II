@@ -1,0 +1,26 @@
+class Solution {
+    //1. create dp array and thre varaibles, initialize dp[0]=1
+    //2. iterate from 1 to n
+    //3. dp[i]= min(2*dp[i2],3*dp[i3],5*dp[i5])
+    //4. if dp[i]==2*dp[i2], increment i2 by 1 similarly for i3 & i5.
+    public int nthUglyNumber(int n) {
+        int[] ugly = new int[n];
+        ugly[0]=1;
+        int i2=0;
+        int i3=0;
+        int i5=0;
+        for(int i=1;i<n;i++){
+            ugly[i]=Math.min(ugly[i2]*2,Math.min(ugly[i3]*3,ugly[i5]*5));
+            if(ugly[i]==ugly[i2]*2){
+                i2+=1;
+            }
+            if(ugly[i]==ugly[i3]*3){
+                i3+=1;
+            }
+            if(ugly[i]==ugly[i5]*5){
+                i5+=1;
+            }
+        }
+        return ugly[n-1];
+    }
+}
