@@ -1,0 +1,37 @@
+class Solution {
+    //make a 2d dp table and initialize it's first row and column with matrix value
+    //dp[i][j] = min(i-1,j & i,j-1 & i-1,j-1)+1 iff, matrix[i][j]='1'
+    //dp[i][j]=0 iff, matrix[i][j]='0'
+    public int maximalSquare(char[][] matrix) {
+        int row=matrix.length; 
+       int col=matrix[0].length; 
+       int max=0;
+       int[][] result=new int[row][col];
+       for(int i=0;i<row;i++){
+           result[i][0]= Character.getNumericValue(matrix[i][0]);
+       }
+        for(int i=0;i<col;i++){
+            result[0][i]=Character.getNumericValue(matrix[0][i]);
+        }
+        
+        for(int i=1;i<row;i++){
+            for(int j=1;j<col;j++){
+                if(matrix[i][j]=='1'){
+                    result[i][j]=Math.min(result[i-1][j],result[i][j-1]);
+                    result[i][j]=Math.min(result[i][j],result[i-1][j-1])+1;
+                }
+                else{
+                    result[i][j]=0;
+                }
+            }
+        }
+        for(int i=0;i<row;i++){
+            for(int j=0;j<col;j++){
+                if(result[i][j]>=max){
+                    max=result[i][j];
+                }
+            }
+        }
+        return max*max;
+    }
+}
