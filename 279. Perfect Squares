@@ -1,0 +1,25 @@
+class Solution {
+    //1. Base condn: if n<=3 return n
+    //2. construct dp array of size n+1 and initialize with i
+    //3. make outer loop from 4 to n & inner loop from as perfect sq less than i
+    //4.dp[i] = min(dp[i] , dp[i-j*j])
+    public int numSquares(int n) {
+        if(n<=3){
+            return n;
+        }
+        return solve(n);
+    }
+    public int solve(int n){
+        int[] arr =  new int[n+1];
+        for(int i=0;i<=n;i++){
+            arr[i]=i;
+        }
+        for(int i=4;i<=n;i++){
+            
+           for(int j=1;j*j<=i;j++){
+               arr[i]=Math.min(arr[i],1+arr[i-j*j]);
+           }
+        }
+        return arr[n];
+    }
+}
