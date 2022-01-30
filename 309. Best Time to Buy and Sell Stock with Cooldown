@@ -1,0 +1,22 @@
+class Solution {
+    //there is a cycle from held(buy), sold(sell), reset(coolDown)
+    //initialize held,sold to min & reset to 0
+    //sold = held+price
+    //held = reset-price => max(held,reset-price)
+    //reset = max(reset,held)
+    
+    public int maxProfit(int[] prices) {
+       int held = Integer.MIN_VALUE;
+       int sold = Integer.MIN_VALUE;
+       int reset = 0;
+       for(int price: prices){
+           int tempSold = sold;
+           sold = held+price; //selling the stock to gain profit, so add price
+           held = Math.max(held, reset-price); //buying the stock, do reduce price
+           reset = Math.max(reset,tempSold);
+           
+       }
+       
+       return Math.max(sold,reset);
+    }
+}
