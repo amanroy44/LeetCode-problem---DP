@@ -1,0 +1,40 @@
+class Solution {
+    //call solve, it's unbounded knapsack variant
+    //if amount is zero return 0, if coins length is zero return -1
+    //create dp table of size amount+1
+    //initialize dp[0]=0 and rest with -1
+    //iterate from 1 to amount and 0 to n
+    //check if diff od amount and coins >=0 && dp[amount-coins]!=-1
+    //check if dp[amount]==-1, then set dp[amount]=1+dp[amount-coins] else, set dp[amount] = min(dp[amount],1+dp[amount-coins])
+    public int coinChange(int[] coins, int amount) {
+        int n=coins.length;
+        return solve(coins,amount,n);
+    }
+    public int solve(int[] coins, int amount, int n){
+       if(amount==0){
+           return 0;
+       }
+       if(n==0){
+           return -1;
+       }
+       int[] dp= new int[amount+1];
+       dp[0]=0;
+        for(int i=1;i<=amount;i++){
+            dp[i]=-1;
+        }
+        for(int i=1;i<=amount;i++){
+            for(int j=0;j<n;j++){
+                if(i-coins[j]>=0 && dp[i-coins[j]]!=-1){
+                    if(dp[i]==-1){
+                        dp[i]=1+dp[i-coins[j]];
+                    }
+                    else{
+                        dp[i]=Math.min(dp[i],1+dp[i-coins[j]]);
+                    }
+                }
+            }
+        }
+        return dp[amount];
+       
+    }
+}
