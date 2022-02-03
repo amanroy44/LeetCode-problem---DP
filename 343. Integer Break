@@ -1,0 +1,23 @@
+class Solution {
+    public int integerBreak(int n) {
+        //create array of size n+1
+        int[] dp =  new int[n+1];
+        //initialize the 0th and 1st pos with 0 & 1 respectively
+        dp[0]=0;
+        dp[1]=1;
+        //iterate from 2 to n
+        for(int i=2;i<=n;i++){
+            //iterate from 1 to less than i
+            for(int j=1;j<i;j++){
+                //make comparisons for diff j
+                dp[i] = Math.max(dp[i], j*Math.max(dp[i-j],i-j));
+            }
+        }
+        //store the max from array and retyrn
+        int max=Integer.MIN_VALUE;
+        for(int ele: dp){
+            max=Math.max(max,ele);
+        }
+        return max;
+    }
+}
