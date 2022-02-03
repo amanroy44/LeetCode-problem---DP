@@ -1,0 +1,20 @@
+//create dp table with size target+1;
+//initilize dp[0] with 1
+//iterate from 1 to target
+//iterate from 0 to nums.length
+//if target-nums[k]>=0 than add dp[target-nums[k]] to dp[i]
+class Solution {
+    public int combinationSum4(int[] nums, int target) {
+       int n=nums.length;
+       int[] dp = new int[target+1];
+       dp[0]=1;
+       for(int i=1;i<=target;i++){
+           for(int k=0;k<n;k++){
+               if(i-nums[k]>=0){
+                  dp[i]+=dp[i-nums[k]];
+               }
+           }
+       }
+        return dp[target];
+    }
+}
