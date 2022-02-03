@@ -1,0 +1,25 @@
+class Solution {
+    public int countNumbersWithUniqueDigits(int n) {
+        //1. create an array of size n+1
+        //2. initialize duplicate with 0 & unique=1 and unique[0]=uni
+        //3. iterate from 1 to n
+        //4. use formula dup = dup*10 + uni*(i-1)
+        //5. use formula uni = 10 power i - 10 power (i-1) - dup;
+        //6. return sum of unique array
+        int[] unique = new int[n+1];
+        int dup=0;
+        int uni=1;
+        unique[0]=uni;
+        for(int i=1;i<=n;i++){
+            dup=dup*10+(i-1)*uni;
+            uni=(int)Math.pow(10,i)-(int)Math.pow(10,i-1)-dup;
+            unique[i]=uni;
+        }
+        int sum=0;
+        for(int i=0;i<=n;i++){
+            sum+=unique[i];
+           
+        }
+        return sum;
+    }
+}
