@@ -1,0 +1,21 @@
+class Solution {
+    //declare two variable up & down initialize with 1 & iterrate
+    //if +ve diff than increment up by down+1
+    //if -ve diff than increment down by up+1;
+    //Finally, return max of up and down
+    public int wiggleMaxLength(int[] nums) {
+        int up=1;
+        int down=1;
+        for(int i=1;i<nums.length;i++){
+            if(nums[i]>nums[i-1]){
+                up=down+1;
+            }
+            if(nums[i]<nums[i-1]){
+                down=up+1;
+            }
+        }
+        return Math.max(up,down);
+        
+        
+    }
+}
