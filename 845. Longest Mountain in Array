@@ -1,0 +1,33 @@
+class Solution {
+    //peek and valley type, consider each mountain and return the longest mount
+    //consider iterating from 1 to length-2 (exclude 0 & len-1)
+    //check every elements, whether it's a peek
+    public int longestMountain(int[] arr) {
+        int n = arr.length;
+        
+        int ans = 0; //don't take min value becoz if mountain formed is plane
+        for(int i=1;i<n-1;i++){
+            if(arr[i]>arr[i-1]&&arr[i]>arr[i+1]){
+                int count=1; // consodering the count of element itself
+                int j =i;
+                //traverse on the left side of the mountain
+                while(j>0 && arr[j]>arr[j-1]){
+                    //take the count of the mountain so formed
+                    count++;
+                    j--;
+                }
+                //traverse on the right side of the mountain
+                j=i;
+                while(j<n-1 && arr[j]>arr[j+1]){
+                    //take the count of the mountain so formed
+                    count++;
+                    j++;
+                }
+                ans = Math.max(ans,count);
+                //initialize i with j, such that next mountain starts with j pos
+                i=j;
+            }
+        }
+        return ans;
+    }
+}
