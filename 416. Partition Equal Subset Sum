@@ -28,8 +28,8 @@ class Solution {
         int row=arr.length;
         int col=arr[0].length;
       
-        for(int n=0;n<row;n++){
-            for(int sum=0;sum<col;sum++){
+        for(int sum=0;sum<col;sum++){ // sums is weight of the bag
+            for(int n=0;n<row;n++){ // n is the item
                 if(n==0){
                     arr[0][sum]=false;
                 }
