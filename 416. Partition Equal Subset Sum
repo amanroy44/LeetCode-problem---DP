@@ -1,0 +1,51 @@
+class Solution {
+    //knapsack variant reduced
+    //sum the array and check if sum is odd or even
+    //if sum is odd, return false else return util function by passing nums and boolean array. make sure boolean size will be 1 greater than nums & target
+    //iterate through rows and column of boolean array
+    //if row =0 than make boolean[0][col] false
+    //else if col=0 than make boolean[row][0]=true
+    //after that include and exclude principle
+    public boolean canPartition(int[] nums) {
+        int sum=0;
+        int n=nums.length;
+        for(int ele:nums){
+            sum+=ele;
+        }
+        int target=sum/2;
+        boolean[][] arr = new boolean[n+1][target+1];
+        if(sum%2!=0){
+            return false;
+        }
+        else{
+            return check(nums,arr);
+        }
+        
+    }
+    
+    public boolean check(int[] nums, boolean[][] arr){
+      
+        int row=arr.length;
+        int col=arr[0].length;
+      
+        for(int n=0;n<row;n++){
+            for(int sum=0;sum<col;sum++){
+                if(n==0){
+                    arr[0][sum]=false;
+                }
+                else if(sum==0){
+                    arr[n][0]=true;
+                }
+                else if(sum-nums[n-1]>=0){
+                    arr[n][sum]=arr[n-1][sum-nums[n-1]]||arr[n-1][sum];
+                }
+                else{
+                    arr[n][sum]=arr[n-1][sum];
+                }
+                
+            }
+        }
+        return arr[row-1][col-1];
+        
+    }
+}
